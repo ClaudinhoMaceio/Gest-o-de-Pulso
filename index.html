@@ -192,6 +192,58 @@
             font-family: inherit;
         }
 
+        input[type="range"] {
+            padding: 0;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(6, 182, 212, 0.4);
+            transition: all var(--transition-fast);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--accent-dark);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(6, 182, 212, 0.4);
+            transition: all var(--transition-fast);
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            background: var(--accent-dark);
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         input:focus,
         select:focus,
         textarea:focus {
@@ -723,6 +775,37 @@
                             <label for="cargo">Cargo Atual: <span style="color: var(--danger)">*</span></label>
                             <input type="text" name="cargo" id="cargo" placeholder="Seu cargo atual..." required minlength="2" maxlength="100">
                         </div>
+                        <div>
+                            <label for="idade">Idade:</label>
+                            <input type="number" name="idade" id="idade" placeholder="Sua idade..." min="16" max="100">
+                        </div>
+                        <div>
+                            <label for="escolaridade">Escolaridade:</label>
+                            <select name="escolaridade" id="escolaridade">
+                                <option value="">Selecione...</option>
+                                <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                                <option value="Pós-Graduação">Pós-Graduação</option>
+                                <option value="Mestrado">Mestrado</option>
+                                <option value="Doutorado">Doutorado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="tempo_empresa">Tempo na Empresa:</label>
+                            <select name="tempo_empresa" id="tempo_empresa">
+                                <option value="">Selecione...</option>
+                                <option value="Menos de 6 meses">Menos de 6 meses</option>
+                                <option value="6 meses a 1 ano">6 meses a 1 ano</option>
+                                <option value="1 a 2 anos">1 a 2 anos</option>
+                                <option value="2 a 5 anos">2 a 5 anos</option>
+                                <option value="5 a 10 anos">5 a 10 anos</option>
+                                <option value="Mais de 10 anos">Mais de 10 anos</option>
+                            </select>
+                        </div>
                 </div>
             </div>
 
@@ -809,6 +892,10 @@
                     </div>
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                         <div>
+                            <label for="tarefas_principais">Quais são as suas tarefas principais? <span style="color: var(--danger)">*</span></label>
+                            <textarea name="tarefas_principais" id="tarefas_principais" rows="3" required minlength="10" maxlength="500" placeholder="Descreva suas principais responsabilidades e tarefas..."></textarea>
+                        </div>
+                        <div>
                             <label for="contribuicao_metas">Como sua função contribui para que a empresa alcance as metas estabelecidas? <span style="color: var(--danger)">*</span></label>
                             <textarea name="contribuicao_metas" id="contribuicao_metas" rows="3" required minlength="10" maxlength="500" placeholder="Descreva como sua função contribui..."></textarea>
                         </div>
@@ -823,13 +910,44 @@
                 </div>
             </div>
 
+            <!-- 3.5. Experiência e Qualidades -->
+            <div class="section">
+                    <div class="section-title">
+                        <i data-lucide="briefcase"></i> 3.5. Experiência e Qualidades
+                    </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <div>
+                            <label for="experiencia_outras_areas">Possui experiência comprovada em outras áreas? Se sim, quais?</label>
+                            <textarea name="experiencia_outras_areas" id="experiencia_outras_areas" rows="3" placeholder="Descreva suas experiências em outras áreas..." maxlength="500"></textarea>
+                        </div>
+                        <div>
+                            <label for="maior_qualidade">Qual a sua maior qualidade no ambiente de trabalho?</label>
+                            <textarea name="maior_qualidade" id="maior_qualidade" rows="3" placeholder="Compartilhe sua principal qualidade profissional..." maxlength="500"></textarea>
+                        </div>
+                        <div>
+                            <label for="aspecto_melhorar">Em que aspecto você precisa melhorar? (0-100, onde 0 = não precisa melhorar e 100 = precisa muito melhorar)</label>
+                            <input type="range" name="aspecto_melhorar" id="aspecto_melhorar" min="0" max="100" value="50" step="1" style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px; font-size: 0.85rem; color: var(--text-muted);">
+                                <span>0 - Não precisa</span>
+                                <span id="aspecto_melhorar_value" style="font-weight: bold; color: var(--accent);">50</span>
+                                <span>100 - Precisa muito</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="maior_desafio">Qual o seu maior desafio no trabalho atualmente?</label>
+                            <textarea name="maior_desafio" id="maior_desafio" rows="3" placeholder="Descreva seu maior desafio..." maxlength="500"></textarea>
+                        </div>
+                </div>
+            </div>
+
             <!-- 4. Retenção e Carreira -->
             <div class="section">
                     <div class="section-title">
                         <i data-lucide="trending-up"></i> 4. Retenção e Carreira
                     </div>
-                <div class="form-grid">
-                    <div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="form-grid">
+                        <div>
                             <label for="futuro">Você se vê trabalhando para a mesma empresa nos próximos 2 ou 5 anos? <span style="color: var(--danger)">*</span></label>
                             <select name="futuro" id="futuro" required>
                             <option value="">Selecione...</option>
@@ -838,11 +956,40 @@
                             <option value="Talvez, depende das oportunidades">Talvez, depende das oportunidades</option>
                             <option value="No momento, não me vejo a longo prazo">No momento, não me vejo a longo prazo</option>
                         </select>
+                        </div>
+                        <div>
+                            <label for="possibilidade_crescimento">Como vê a sua possibilidade de crescimento aqui?</label>
+                            <select name="possibilidade_crescimento" id="possibilidade_crescimento">
+                            <option value="">Selecione...</option>
+                            <option value="Excelente, vejo muitas oportunidades">Excelente, vejo muitas oportunidades</option>
+                            <option value="Boa, acredito que há possibilidades">Boa, acredito que há possibilidades</option>
+                            <option value="Moderada, depende de fatores externos">Moderada, depende de fatores externos</option>
+                            <option value="Limitada, não vejo muitas oportunidades">Limitada, não vejo muitas oportunidades</option>
+                            <option value="Não vejo possibilidade de crescimento">Não vejo possibilidade de crescimento</option>
+                        </select>
+                        </div>
                     </div>
+                    <div class="form-grid">
                         <div>
                             <label for="almeja_cargo">Almeja algum outro cargo na empresa?</label>
                             <input type="text" name="almeja_cargo" id="almeja_cargo" placeholder="Ex: Supervisor, Gerente..." maxlength="100">
                         </div>
+                        <div>
+                            <label for="deseja_migrar_cargo">Deseja migrar para outro cargo específico? Se sim, qual?</label>
+                            <input type="text" name="deseja_migrar_cargo" id="deseja_migrar_cargo" placeholder="Ex: Analista de Marketing, Coordenador..." maxlength="100">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="interesse_lideranca">Tem interesse em liderança?</label>
+                        <select name="interesse_lideranca" id="interesse_lideranca">
+                            <option value="">Selecione...</option>
+                            <option value="Sim, muito interesse">Sim, muito interesse</option>
+                            <option value="Sim, tenho interesse moderado">Sim, tenho interesse moderado</option>
+                            <option value="Talvez, depende da oportunidade">Talvez, depende da oportunidade</option>
+                            <option value="Não tenho interesse no momento">Não tenho interesse no momento</option>
+                            <option value="Não tenho interesse em liderança">Não tenho interesse em liderança</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -1234,9 +1381,13 @@
                             ...data,
                             nome: Utils.sanitize(data.nome || ''),
                             cargo: Utils.sanitize(data.cargo || ''),
+                            tarefas_principais: Utils.sanitize(data.tarefas_principais || ''),
                             contribuicao_metas: Utils.sanitize(data.contribuicao_metas || ''),
                             uso_trabalho: Utils.sanitize(data.uso_trabalho || ''),
                             obstaculos: Utils.sanitize(data.obstaculos || ''),
+                            experiencia_outras_areas: Utils.sanitize(data.experiencia_outras_areas || ''),
+                            maior_qualidade: Utils.sanitize(data.maior_qualidade || ''),
+                            maior_desafio: Utils.sanitize(data.maior_desafio || ''),
                             outras_sugestoes: Utils.sanitize(data.outras_sugestoes || ''),
                             timestamp: new Date().toISOString()
                         };
@@ -1299,9 +1450,13 @@
                                 ...itemWithoutId,
                                 nome: Utils.sanitize(item.nome || ''),
                                 cargo: Utils.sanitize(item.cargo || ''),
+                                tarefas_principais: Utils.sanitize(item.tarefas_principais || ''),
                                 contribuicao_metas: Utils.sanitize(item.contribuicao_metas || ''),
                                 uso_trabalho: Utils.sanitize(item.uso_trabalho || ''),
                                 obstaculos: Utils.sanitize(item.obstaculos || ''),
+                                experiencia_outras_areas: Utils.sanitize(item.experiencia_outras_areas || ''),
+                                maior_qualidade: Utils.sanitize(item.maior_qualidade || ''),
+                                maior_desafio: Utils.sanitize(item.maior_desafio || ''),
                                 outras_sugestoes: Utils.sanitize(item.outras_sugestoes || '')
                             };
 
@@ -1364,6 +1519,7 @@
                         'conexao_colegas',
                         'valorizacao_superiores',
                         'valorizacao',
+                        'tarefas_principais',
                         'contribuicao_metas',
                         'uso_trabalho',
                         'obstaculos',
@@ -1379,9 +1535,13 @@
 
                     // Validar tamanho de textos
                     const textFields = {
+                        tarefas_principais: { min: 10, max: 500 },
                         contribuicao_metas: { min: 10, max: 500 },
                         uso_trabalho: { min: 10, max: 500 },
-                        obstaculos: { min: 10, max: 500 }
+                        obstaculos: { min: 10, max: 500 },
+                        experiencia_outras_areas: { min: 0, max: 500 },
+                        maior_qualidade: { min: 0, max: 500 },
+                        maior_desafio: { min: 0, max: 500 }
                     };
 
                     Object.entries(textFields).forEach(([field, limits]) => {
@@ -1443,7 +1603,10 @@
                                         <div style="background: rgba(255,255,255,0.15); padding: 12px 16px; border-radius: 8px; backdrop-filter: blur(10px);">
                                             <p style="margin: 0 0 6px 0; font-size: 13px; opacity: 0.9;"><strong>📋 Cargo:</strong> ${Utils.sanitize(item.cargo || 'N/A')}</p>
                                             <p style="margin: 0 0 6px 0; font-size: 13px; opacity: 0.9;"><strong>📅 Data da Pesquisa:</strong> ${Utils.formatDate(item.data_pesquisa)}</p>
-                                            ${item.data_admissao ? `<p style="margin: 0; font-size: 13px; opacity: 0.9;"><strong>🎯 Data de Admissão:</strong> ${Utils.formatDate(item.data_admissao)}</p>` : ''}
+                                            ${item.data_admissao ? `<p style="margin: 0 0 6px 0; font-size: 13px; opacity: 0.9;"><strong>🎯 Data de Admissão:</strong> ${Utils.formatDate(item.data_admissao)}</p>` : ''}
+                                            ${item.idade ? `<p style="margin: 0 0 6px 0; font-size: 13px; opacity: 0.9;"><strong>🎂 Idade:</strong> ${item.idade} anos</p>` : ''}
+                                            ${item.escolaridade ? `<p style="margin: 0 0 6px 0; font-size: 13px; opacity: 0.9;"><strong>🎓 Escolaridade:</strong> ${Utils.sanitize(item.escolaridade)}</p>` : ''}
+                                            ${item.tempo_empresa ? `<p style="margin: 0; font-size: 13px; opacity: 0.9;"><strong>⏱️ Tempo na Empresa:</strong> ${Utils.sanitize(item.tempo_empresa)}</p>` : ''}
                                         </div>
                                     </div>
                                     <div style="text-align: center; background: rgba(255,255,255,0.2); padding: 20px; border-radius: 12px; min-width: 140px; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.3);">
@@ -1501,6 +1664,12 @@
                                     Função e Produtividade
                                 </h4>
                                 <div style="display: flex; flex-direction: column; gap: 15px;">
+                                    ${item.tarefas_principais ? `
+                                    <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">📝 Tarefas Principais</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${Utils.sanitize(item.tarefas_principais)}</p>
+                                    </div>
+                                    ` : ''}
                                     <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
                                         <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🎯 Contribuição para Metas</p>
                                         <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${Utils.sanitize(item.contribuicao_metas || 'N/A')}</p>
@@ -1516,20 +1685,78 @@
                                 </div>
                             </div>
 
+                            ${(item.experiencia_outras_areas || item.maior_qualidade || item.aspecto_melhorar || item.maior_desafio) ? `
+                            <div style="margin-bottom: 30px; background: linear-gradient(to right, #f8fafc, #ffffff); padding: 20px; border-radius: 12px; border-left: 5px solid #8b5cf6; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                                <h4 style="color: #1e293b; font-size: 18px; font-weight: 800; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px;">
+                                    <span style="background: #8b5cf6; color: white; width: 32px; height: 32px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">3.5</span>
+                                    Experiência e Qualidades
+                                </h4>
+                                <div style="display: flex; flex-direction: column; gap: 15px;">
+                                    ${item.experiencia_outras_areas ? `
+                                    <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">💼 Experiência em Outras Áreas</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${Utils.sanitize(item.experiencia_outras_areas)}</p>
+                                    </div>
+                                    ` : ''}
+                                    ${item.maior_qualidade ? `
+                                    <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">⭐ Maior Qualidade no Ambiente de Trabalho</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${Utils.sanitize(item.maior_qualidade)}</p>
+                                    </div>
+                                    ` : ''}
+                                    ${item.aspecto_melhorar ? `
+                                    <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">📊 Aspecto que Precisa Melhorar</p>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="flex: 1; background: #f1f5f9; height: 8px; border-radius: 4px; overflow: hidden;">
+                                                <div style="background: linear-gradient(90deg, #ef4444 0%, #f59e0b 50%, #10b981 100%); height: 100%; width: ${item.aspecto_melhorar}%; transition: width 0.3s;"></div>
+                                            </div>
+                                            <span style="font-size: 18px; font-weight: 700; color: #1e293b; min-width: 45px; text-align: right;">${item.aspecto_melhorar}/100</span>
+                                        </div>
+                                    </div>
+                                    ` : ''}
+                                    ${item.maior_desafio ? `
+                                    <div style="background: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 12px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🎯 Maior Desafio no Trabalho</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.7; white-space: pre-wrap;">${Utils.sanitize(item.maior_desafio)}</p>
+                                    </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                            ` : ''}
+
                             <div style="margin-bottom: 30px; background: linear-gradient(to right, #f8fafc, #ffffff); padding: 20px; border-radius: 12px; border-left: 5px solid #f59e0b; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                                 <h4 style="color: #1e293b; font-size: 18px; font-weight: 800; margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px;">
                                     <span style="background: #f59e0b; color: white; width: 32px; height: 32px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">4</span>
                                     Retenção e Carreira
                                 </h4>
-                                <div style="display: grid; grid-template-columns: ${item.almeja_cargo ? '1fr 1fr' : '1fr'}; gap: 15px;">
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
                                     <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
                                         <p style="margin: 0 0 10px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🔮 Visão de Futuro (2-5 anos)</p>
                                         <p style="margin: 0; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.5;">${Utils.sanitize(item.futuro || 'N/A')}</p>
                                     </div>
+                                    ${item.possibilidade_crescimento ? `
+                                    <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 10px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">📈 Possibilidade de Crescimento</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.5;">${Utils.sanitize(item.possibilidade_crescimento)}</p>
+                                    </div>
+                                    ` : ''}
                                     ${item.almeja_cargo ? `
                                     <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
                                         <p style="margin: 0 0 10px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🎯 Cargo Almejado</p>
                                         <p style="margin: 0; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.5;">${Utils.sanitize(item.almeja_cargo)}</p>
+                                    </div>
+                                    ` : ''}
+                                    ${item.deseja_migrar_cargo ? `
+                                    <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 10px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🔄 Deseja Migrar para Cargo</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.5;">${Utils.sanitize(item.deseja_migrar_cargo)}</p>
+                                    </div>
+                                    ` : ''}
+                                    ${item.interesse_lideranca ? `
+                                    <div style="background: white; padding: 18px; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                        <p style="margin: 0 0 10px 0; color: #64748b; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">👔 Interesse em Liderança</p>
+                                        <p style="margin: 0; color: #1e293b; font-size: 15px; font-weight: 600; line-height: 1.5;">${Utils.sanitize(item.interesse_lideranca)}</p>
                                     </div>
                                     ` : ''}
                                 </div>
@@ -1630,17 +1857,28 @@
                                 'Data de Admissão',
                                 'Nome',
                                 'Cargo',
+                                'Idade',
+                                'Escolaridade',
+                                'Tempo na Empresa',
                                 'eNPS',
                                 'Orgulho do Cargo',
                                 'Felicidade',
                                 'Conexão com Colegas',
                                 'Valorização por Superiores',
                                 'Valorização',
+                                'Tarefas Principais',
                                 'Contribuição para Metas',
                                 'Uso do Trabalho',
                                 'Obstáculos',
+                                'Experiência em Outras Áreas',
+                                'Maior Qualidade',
+                                'Aspecto a Melhorar (0-100)',
+                                'Maior Desafio',
                                 'Visão de Futuro',
+                                'Possibilidade de Crescimento',
                                 'Cargo Almejado',
+                                'Deseja Migrar para Cargo',
+                                'Interesse em Liderança',
                                 'Benefícios',
                                 'Outras Sugestões',
                                 'Timestamp'
@@ -1653,17 +1891,28 @@
                                 item.data_admissao || '',
                                 item.nome || '',
                                 item.cargo || '',
+                                item.idade || '',
+                                item.escolaridade || '',
+                                item.tempo_empresa || '',
                                 item.enps || '',
                                 item.orgulho_cargo || '',
                                 item.felicidade || '',
                                 item.conexao_colegas || '',
                                 item.valorizacao_superiores || '',
                                 item.valorizacao || '',
+                                item.tarefas_principais || '',
                                 item.contribuicao_metas || '',
                                 item.uso_trabalho || '',
                                 item.obstaculos || '',
+                                item.experiencia_outras_areas || '',
+                                item.maior_qualidade || '',
+                                item.aspecto_melhorar || '',
+                                item.maior_desafio || '',
                                 item.futuro || '',
+                                item.possibilidade_crescimento || '',
                                 item.almeja_cargo || '',
+                                item.deseja_migrar_cargo || '',
+                                item.interesse_lideranca || '',
                                 item.beneficios || '',
                                 item.outras_sugestoes || '',
                                 item.timestamp || ''
@@ -1680,17 +1929,28 @@
                             { wch: 15 }, // Data Admissão
                             { wch: 25 }, // Nome
                             { wch: 20 }, // Cargo
+                            { wch: 8 },  // Idade
+                            { wch: 25 }, // Escolaridade
+                            { wch: 18 }, // Tempo na Empresa
                             { wch: 8 },  // eNPS
                             { wch: 25 }, // Orgulho
                             { wch: 15 }, // Felicidade
                             { wch: 20 }, // Conexão
                             { wch: 25 }, // Valorização Superiores
                             { wch: 20 }, // Valorização
+                            { wch: 40 }, // Tarefas Principais
                             { wch: 40 }, // Contribuição
                             { wch: 40 }, // Uso Trabalho
                             { wch: 40 }, // Obstáculos
+                            { wch: 35 }, // Experiência Outras Áreas
+                            { wch: 30 }, // Maior Qualidade
+                            { wch: 12 }, // Aspecto Melhorar
+                            { wch: 40 }, // Maior Desafio
                             { wch: 35 }, // Futuro
+                            { wch: 30 }, // Possibilidade Crescimento
                             { wch: 20 }, // Cargo Almejado
+                            { wch: 25 }, // Deseja Migrar Cargo
+                            { wch: 22 }, // Interesse Liderança
                             { wch: 30 }, // Benefícios
                             { wch: 40 }, // Outras Sugestões
                             { wch: 20 }  // Timestamp
@@ -2158,8 +2418,19 @@
 
                     // Inicializar ícones Lucide
                     if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
+                        lucide.createIcons();
+                    }
+
+                    // Configurar slider de aspecto a melhorar
+                    const aspectoMelhorarSlider = document.getElementById('aspecto_melhorar');
+                    const aspectoMelhorarValue = document.getElementById('aspecto_melhorar_value');
+                    if (aspectoMelhorarSlider && aspectoMelhorarValue) {
+                        aspectoMelhorarSlider.addEventListener('input', function() {
+                            aspectoMelhorarValue.textContent = this.value;
+                        });
+                        // Inicializar valor
+                        aspectoMelhorarValue.textContent = aspectoMelhorarSlider.value;
+                    }
 
                     // Configurar Enter no modal de login
                     const passInput = document.getElementById('passInput');
